@@ -84,11 +84,9 @@ const Index = () => {
             </div>
             <div className="relative animate-scale-in">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-3xl"></div>
-              <img 
-                src="https://cdn.poehali.dev/projects/2d18bf5c-47ad-42f5-8cf3-682c0d205f53/files/202bec22-7e68-47c4-9b0b-0f020b25cad1.jpg" 
-                alt="Hero" 
-                className="relative rounded-2xl shadow-2xl w-full"
-              />
+              <div className="relative rounded-2xl shadow-2xl w-full aspect-video bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 flex items-center justify-center">
+                <Icon name="Sparkles" size={120} className="text-primary/30" />
+              </div>
             </div>
           </div>
         </div>
