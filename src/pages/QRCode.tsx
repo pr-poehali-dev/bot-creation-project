@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 const QRCode = () => {
-  const [url] = useState('https://12ac8f5e.poehali.app');
+  const [url] = useState('https://bot-creation-project--preview.poehali.dev/');
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
