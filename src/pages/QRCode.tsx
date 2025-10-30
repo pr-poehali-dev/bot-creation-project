@@ -1,33 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import QRCodeLib from 'qrcode';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 const QRCode = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [url] = useState('https://12ac8f5e.poehali.app');
+  const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const generateQR = async () => {
-      if (canvasRef.current) {
-        try {
-          setIsLoading(true);
-          setError(null);
-          await QRCodeLib.toCanvas(canvasRef.current, url, {
-            width: 400,
-            margin: 2,
-            color: {
-              dark: '#000000',
-              light: '#FFFFFF'
-            }
-          });
-          setIsLoading(false);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : 'Ошибка генерации QR-кода');
-          setIsLoading(false);
-        }
+      try {
+        setIsLoading(true);
+        setError(null);
+        const dataUrl = await QRCodeLib.toDataURL(url, {
+          width: 400,
+          margin: 2,
+          color: {
+            dark: '#000000',
+            light: '#FFFFFF'
+          }
+        });
+        setQrDataUrl(dataUrl);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Ошибка генерации QR-кода');
+        setIsLoading(false);
       }
     };
     
@@ -35,10 +34,10 @@ const QRCode = () => {
   }, [url]);
 
   const downloadQRCode = () => {
-    if (canvasRef.current) {
+    if (qrDataUrl) {
       const link = document.createElement('a');
       link.download = 'qr-code.png';
-      link.href = canvasRef.current.toDataURL();
+      link.href = qrDataUrl;
       link.click();
     }
   };
@@ -58,7 +57,7 @@ const QRCode = () => {
         
         <div className="flex justify-center mb-8 bg-white p-6 rounded-xl shadow-inner">
           {isLoading && <p className="text-gray-500">Загрузка...</p>}
-          <canvas ref={canvasRef} className="max-w-full h-auto" />
+          {qrDataUrl && <img src={qrDataUrl} alt="QR код" className="max-w-full h-auto" />}
         </div>
         
         <div className="text-center mb-6">
