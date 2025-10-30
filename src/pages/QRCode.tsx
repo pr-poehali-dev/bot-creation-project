@@ -6,18 +6,32 @@ import Icon from '@/components/ui/icon';
 const QRCode = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [url] = useState('https://12ac8f5e.poehali.app');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (canvasRef.current) {
-      QRCodeLib.toCanvas(canvasRef.current, url, {
-        width: 400,
-        margin: 2,
-        color: {
-          dark: '#000000',
-          light: '#FFFFFF'
+    const generateQR = async () => {
+      if (canvasRef.current) {
+        try {
+          setIsLoading(true);
+          setError(null);
+          await QRCodeLib.toCanvas(canvasRef.current, url, {
+            width: 400,
+            margin: 2,
+            color: {
+              dark: '#000000',
+              light: '#FFFFFF'
+            }
+          });
+          setIsLoading(false);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : 'Ошибка генерации QR-кода');
+          setIsLoading(false);
         }
-      });
-    }
+      }
+    };
+    
+    generateQR();
   }, [url]);
 
   const downloadQRCode = () => {
@@ -35,7 +49,15 @@ const QRCode = () => {
         <h1 className="text-3xl font-bold text-center mb-2 text-gray-800">QR-код сайта</h1>
         <p className="text-center text-gray-600 mb-8">Отсканируйте для перехода</p>
         
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+            <p className="font-semibold">Ошибка:</p>
+            <p>{error}</p>
+          </div>
+        )}
+        
         <div className="flex justify-center mb-8 bg-white p-6 rounded-xl shadow-inner">
+          {isLoading && <p className="text-gray-500">Загрузка...</p>}
           <canvas ref={canvasRef} className="max-w-full h-auto" />
         </div>
         
@@ -48,6 +70,7 @@ const QRCode = () => {
           onClick={downloadQRCode} 
           className="w-full bg-blue-600 hover:bg-blue-700"
           size="lg"
+          disabled={isLoading || !!error}
         >
           <Icon name="Download" size={20} className="mr-2" />
           Скачать QR-код
