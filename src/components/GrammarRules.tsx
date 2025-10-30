@@ -6,102 +6,102 @@ import Icon from "@/components/ui/icon";
 
 const grammarRules = [
   {
-    grade: "1-2 класс",
+    grade: "1 класс",
     topics: [
       {
-        title: "Алфавит и произношение",
-        content: "26 букв английского алфавита: A-Z. Гласные: A, E, I, O, U. Согласные: все остальные. Учим произношение каждой буквы.",
-        examples: ["A - эй", "B - би", "C - си"]
+        title: "Английский алфавит",
+        content: "26 букв английского алфавита: A-Z. Заглавные и строчные буквы. Учимся их писать и произносить.",
+        examples: ["A a - эй", "B b - би", "C c - си", "D d - ди"]
       },
       {
-        title: "Простые предложения",
-        content: "Структура: Подлежащее + Глагол. Используем глагол to be в настоящем времени: am, is, are.",
-        examples: ["I am a student.", "She is happy.", "They are friends."]
+        title: "Приветствия",
+        content: "Как здороваться и прощаться по-английски.",
+        examples: ["Hello! - Привет!", "Good morning! - Доброе утро!", "Goodbye! - До свидания!"]
+      },
+      {
+        title: "Цвета",
+        content: "Основные цвета на английском языке.",
+        examples: ["red - красный", "blue - синий", "green - зелёный", "yellow - жёлтый"]
+      },
+      {
+        title: "Числа 1-10",
+        content: "Учимся считать от 1 до 10 на английском.",
+        examples: ["one - 1", "two - 2", "three - 3", "four - 4", "five - 5"]
+      }
+    ]
+  },
+  {
+    grade: "2 класс",
+    topics: [
+      {
+        title: "Глагол to be (am, is, are)",
+        content: "Глагол быть в настоящем времени. I am, You are, He/She/It is, We/They are.",
+        examples: ["I am a pupil. - Я ученик.", "She is happy. - Она счастлива.", "They are friends. - Они друзья."]
       },
       {
         title: "Артикли a/an",
         content: "A - перед согласными звуками. An - перед гласными звуками.",
-        examples: ["a cat", "an apple", "a book", "an egg"]
+        examples: ["a cat - кот", "an apple - яблоко", "a dog - собака", "an orange - апельсин"]
+      },
+      {
+        title: "Местоимения",
+        content: "Личные местоимения: I, you, he, she, it, we, they.",
+        examples: ["I - я", "you - ты/вы", "he - он", "she - она", "it - оно", "we - мы", "they - они"]
+      },
+      {
+        title: "Семья",
+        content: "Слова про членов семьи.",
+        examples: ["mother - мама", "father - папа", "sister - сестра", "brother - брат"]
       }
     ]
   },
   {
-    grade: "3-4 класс",
+    grade: "3 класс",
     topics: [
       {
-        title: "Present Simple",
-        content: "Для регулярных действий. Формула: I/You/We/They + глагол, He/She/It + глагол + s/es",
-        examples: ["I play football.", "She plays tennis.", "They study English."]
+        title: "Present Simple (настоящее время)",
+        content: "Для регулярных действий и фактов. I/You/We/They + глагол, He/She/It + глагол+s.",
+        examples: ["I play football. - Я играю в футбол.", "She reads books. - Она читает книги.", "They live in Moscow. - Они живут в Москве."]
       },
       {
         title: "Множественное число",
-        content: "Обычно добавляем -s. После s, x, ch, sh добавляем -es. Y меняем на -ies.",
-        examples: ["cat → cats", "box → boxes", "baby → babies"]
+        content: "Обычно добавляем -s. После s, x, ch, sh добавляем -es. Y меняется на -ies.",
+        examples: ["cat → cats", "box → boxes", "baby → babies", "toy → toys"]
+      },
+      {
+        title: "Have got / Has got",
+        content: "Чтобы сказать, что у нас что-то есть. I/You/We/They have got. He/She/It has got.",
+        examples: ["I have got a bike. - У меня есть велосипед.", "She has got a cat. - У неё есть кот."]
       },
       {
         title: "There is / There are",
-        content: "There is - для единственного числа. There are - для множественного.",
-        examples: ["There is a book on the table.", "There are three apples."]
+        content: "There is - для единственного числа. There are - для множественного числа.",
+        examples: ["There is a book on the table. - На столе есть книга.", "There are five apples. - Есть пять яблок."]
       }
     ]
   },
   {
-    grade: "5-6 класс",
+    grade: "4 класс",
     topics: [
       {
-        title: "Past Simple",
-        content: "Для действий в прошлом. Правильные глаголы: +ed. Неправильные - учим формы.",
-        examples: ["I played yesterday.", "She went to school.", "We studied English."]
+        title: "Past Simple (прошедшее время)",
+        content: "Для действий в прошлом. Правильные глаголы: глагол+ed. Неправильные глаголы учим отдельно.",
+        examples: ["I played yesterday. - Я играл вчера.", "She went to school. - Она ходила в школу.", "We watched a film. - Мы смотрели фильм."]
       },
       {
-        title: "Future Simple (will)",
-        content: "Для будущих действий. Формула: will + глагол.",
-        examples: ["I will go tomorrow.", "She will study.", "They will play."]
+        title: "Вопросы с Do/Does",
+        content: "Do - для I/you/we/they. Does - для he/she/it. Ставим перед подлежащим.",
+        examples: ["Do you like ice cream? - Ты любишь мороженое?", "Does she play tennis? - Она играет в теннис?"]
       },
       {
-        title: "Степени сравнения",
-        content: "Положительная, сравнительная (-er/more), превосходная (-est/most).",
-        examples: ["big → bigger → biggest", "beautiful → more beautiful → most beautiful"]
-      }
-    ]
-  },
-  {
-    grade: "7-8 класс",
-    topics: [
-      {
-        title: "Present Continuous",
-        content: "Для действий прямо сейчас. Формула: am/is/are + глагол + ing",
-        examples: ["I am reading now.", "She is playing.", "They are studying."]
+        title: "Модальный глагол Can",
+        content: "Can - мочь, уметь. Can + глагол без частицы to.",
+        examples: ["I can swim. - Я умею плавать.", "She can dance. - Она умеет танцевать.", "Can you help me? - Ты можешь помочь мне?"]
       },
       {
-        title: "Present Perfect",
-        content: "Для действий с результатом в настоящем. Формула: have/has + глагол (3 форма)",
-        examples: ["I have done my homework.", "She has visited London.", "We have seen this film."]
-      },
-      {
-        title: "Модальные глаголы",
-        content: "Can, must, should, may - выражают возможность, обязанность, совет.",
-        examples: ["I can swim.", "You must study.", "She should help."]
-      }
-    ]
-  },
-  {
-    grade: "9-11 класс",
-    topics: [
-      {
-        title: "Past Continuous",
-        content: "Для длительного действия в прошлом. Формула: was/were + глагол + ing",
-        examples: ["I was reading at 5 pm.", "They were playing football."]
-      },
-      {
-        title: "Условные предложения",
-        content: "Type 0 (факты), Type 1 (реальное будущее), Type 2 (нереальное настоящее), Type 3 (нереальное прошлое).",
-        examples: ["If I study, I will pass. (Type 1)", "If I were rich, I would travel. (Type 2)"]
-      },
-      {
-        title: "Пассивный залог",
-        content: "Когда действие совершается над подлежащим. Формула: be + глагол (3 форма)",
-        examples: ["The book is written.", "The house was built.", "The letter will be sent."]
+        title: "Предлоги места",
+        content: "Где что находится: in (в), on (на), under (под), near (рядом).",
+        examples: ["in the box - в коробке", "on the table - на столе", "under the bed - под кроватью", "near the window - у окна"]
       }
     ]
   }
@@ -116,7 +116,7 @@ const GrammarRules = () => {
           Грамматические правила
         </CardTitle>
         <CardDescription>
-          Полный курс грамматики английского языка с 1 по 11 класс
+          Основы грамматики английского языка для начальной школы (1-4 класс)
         </CardDescription>
       </CardHeader>
       <CardContent>
