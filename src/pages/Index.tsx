@@ -37,7 +37,7 @@ const Index = () => {
     {
       title: "Поддержка",
       description: "Техническая поддержка и обслуживание ваших проектов 24/7",
-      icon: "HeadphonesIcon",
+      icon: "Headphones",
       color: "bg-accent"
     }
   ];
