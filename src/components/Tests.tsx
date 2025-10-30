@@ -207,11 +207,16 @@ const Tests = () => {
         <CardContent className="text-center space-y-6">
           <div className="text-6xl font-bold text-primary">{percentage}%</div>
           <p className="text-xl">
-            Правильных ответов: {score} из {tests[selectedTest].length}
+            Ваш результат: {score} из {tests[selectedTest].length}
           </p>
           <Progress value={percentage} className="h-3" />
           <div className="space-y-2">
-            {percentage >= 80 && (
+            {percentage === 100 && (
+              <p className="text-lg text-green-600 font-semibold">
+                Идеально! Все ответы правильные! 🎉
+              </p>
+            )}
+            {percentage >= 80 && percentage < 100 && (
               <p className="text-lg text-green-600 font-semibold">
                 Отлично! Вы хорошо знаете эту тему! 🎉
               </p>
