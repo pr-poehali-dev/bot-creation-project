@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import IrregularVerbs from "@/components/IrregularVerbs";
 import GrammarRules from "@/components/GrammarRules";
 import Tenses from "@/components/Tenses";
@@ -13,6 +15,14 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12 animate-fade-in">
+          <div className="flex justify-end mb-4">
+            <Link to="/qr">
+              <Button variant="outline" size="sm" className="gap-2">
+                <Icon name="QrCode" size={18} />
+                QR-код сайта
+              </Button>
+            </Link>
+          </div>
           <h1 className="text-5xl font-bold text-primary mb-4">
             Английский язык 📚
           </h1>
