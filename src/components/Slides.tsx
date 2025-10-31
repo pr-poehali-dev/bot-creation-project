@@ -7,15 +7,46 @@ import Icon from "@/components/ui/icon";
 interface Slide {
   title: string;
   subtitle: string;
-  content: string[];
+  content?: string[];
   category: string;
+  image?: string;
+  type: "text" | "image";
 }
 
 const slidesData: Slide[] = [
   {
+    title: "London is the Capital of Great Britain",
+    subtitle: "Лондон — столица Великобритании",
+    category: "Geography",
+    type: "image",
+    image: "https://cdn.poehali.dev/files/de7b1ade-2428-4f8d-a674-6fe85c68189f.jpg"
+  },
+  {
+    title: "The Tower of London",
+    subtitle: "Лондонский Тауэр",
+    category: "Geography",
+    type: "image",
+    image: "https://cdn.poehali.dev/files/5cbca72a-5b99-4c6f-b290-55895180491a.jpg"
+  },
+  {
+    title: "The Houses of Parliament and Big Ben",
+    subtitle: "Здание Парламента и Биг-Бен",
+    category: "Geography",
+    type: "image",
+    image: "https://cdn.poehali.dev/files/4727e2cb-bea6-453e-9bbd-3cd0ec346ecd.jpg"
+  },
+  {
+    title: "Buckingham Palace",
+    subtitle: "Букингемский дворец",
+    category: "Geography",
+    type: "image",
+    image: "https://cdn.poehali.dev/files/b4d2a120-5d6a-4816-833f-0a91c219dae3.jpg"
+  },
+  {
     title: "Tenses Overview",
     subtitle: "Обзор времён английского языка",
     category: "Grammar",
+    type: "text",
     content: [
       "Present Simple - регулярные действия и факты",
       "Present Continuous - действия прямо сейчас",
@@ -29,6 +60,7 @@ const slidesData: Slide[] = [
     title: "Articles: a, an, the",
     subtitle: "Артикли в английском языке",
     category: "Grammar",
+    type: "text",
     content: [
       "A / AN - неопределённый артикль (один из многих)",
       "A - перед согласными звуками (a cat, a university)",
@@ -41,6 +73,7 @@ const slidesData: Slide[] = [
     title: "Prepositions of Time",
     subtitle: "Предлоги времени",
     category: "Vocabulary",
+    type: "text",
     content: [
       "IN - месяцы, годы, сезоны (in May, in 2023, in summer)",
       "ON - дни недели, даты (on Monday, on 5th March)",
@@ -53,6 +86,7 @@ const slidesData: Slide[] = [
     title: "Question Words",
     subtitle: "Вопросительные слова",
     category: "Grammar",
+    type: "text",
     content: [
       "WHAT - что? (What is your name?)",
       "WHERE - где? (Where do you live?)",
@@ -67,6 +101,7 @@ const slidesData: Slide[] = [
     title: "Modal Verbs",
     subtitle: "Модальные глаголы",
     category: "Grammar",
+    type: "text",
     content: [
       "CAN - умею, могу (физическая возможность)",
       "COULD - мог бы (вежливая просьба, прошлое)",
@@ -81,6 +116,7 @@ const slidesData: Slide[] = [
     title: "Phrasal Verbs - Common",
     subtitle: "Популярные фразовые глаголы",
     category: "Vocabulary",
+    type: "text",
     content: [
       "GET UP - вставать (I get up at 7 am)",
       "WAKE UP - просыпаться",
@@ -95,6 +131,7 @@ const slidesData: Slide[] = [
     title: "Conditionals Types",
     subtitle: "Типы условных предложений",
     category: "Grammar",
+    type: "text",
     content: [
       "Type 0: If + Present, Present (факты)",
       "Type 1: If + Present, will + verb (реальное будущее)",
@@ -107,6 +144,7 @@ const slidesData: Slide[] = [
     title: "Word Formation",
     subtitle: "Словообразование",
     category: "Vocabulary",
+    type: "text",
     content: [
       "Prefixes: UN-, DIS-, RE-, PRE-, POST-",
       "Suffixes for nouns: -TION, -MENT, -NESS, -ER",
@@ -153,21 +191,31 @@ const Slides = () => {
           </div>
         </CardHeader>
         <CardContent className="flex-1 flex flex-col justify-center p-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-4xl font-bold text-primary mb-4">{slide.title}</h2>
             <p className="text-xl text-muted-foreground">{slide.subtitle}</p>
           </div>
-          <div className="space-y-4">
-            {slide.content.map((item, index) => (
-              <div
-                key={index}
-                className="bg-secondary/20 p-4 rounded-lg text-lg font-medium animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+          {slide.type === "image" && slide.image ? (
+            <div className="flex justify-center items-center flex-1">
+              <img 
+                src={slide.image} 
+                alt={slide.title}
+                className="max-w-full max-h-[500px] rounded-lg shadow-lg object-contain"
+              />
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {slide.content?.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-secondary/20 p-4 rounded-lg text-lg font-medium animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
         </CardContent>
         <CardContent className="border-t py-4">
           <div className="flex justify-between items-center">
@@ -217,6 +265,15 @@ const Slides = () => {
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => goToSlide(index)}
           >
+            {slide.type === "image" && slide.image && (
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src={slide.image} 
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
             <CardHeader>
               <div className="flex items-start justify-between mb-2">
                 <Badge variant="secondary">{slide.category}</Badge>
@@ -227,7 +284,7 @@ const Slides = () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                {slide.content.length} пунктов • Нажмите для просмотра
+                {slide.type === "image" ? "Изображение • Нажмите для просмотра" : `${slide.content?.length || 0} пунктов • Нажмите для просмотра`}
               </p>
             </CardContent>
           </Card>
