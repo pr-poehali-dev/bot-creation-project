@@ -268,7 +268,7 @@ const Tests = () => {
       <CardContent className="space-y-6">
         <h3 className="text-2xl font-semibold">{currentTest[currentQuestion].question}</h3>
         
-        <RadioGroup value={selectedAnswer?.toString()} onValueChange={(value) => setSelectedAnswer(Number(value))}>
+        <RadioGroup value={selectedAnswer !== null ? selectedAnswer.toString() : undefined} onValueChange={(value) => setSelectedAnswer(parseInt(value, 10))}>
           <div className="space-y-3">
             {currentTest[currentQuestion].options.map((option, index) => (
               <div key={index} className="flex items-center space-x-2 border rounded-lg p-4 hover:bg-accent/50 cursor-pointer">
