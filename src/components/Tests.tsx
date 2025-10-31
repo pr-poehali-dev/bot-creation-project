@@ -100,6 +100,7 @@ const Tests = () => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>([]);
+  const [answerLocked, setAnswerLocked] = useState(false);
   const { toast } = useToast();
 
   const startTest = (testName: string) => {
@@ -109,20 +110,18 @@ const Tests = () => {
     setScore(0);
     setShowResult(false);
     setAnsweredQuestions(new Array(tests[testName].length).fill(false));
+    setAnswerLocked(false);
   };
 
-  const handleAnswer = () => {
-    if (selectedAnswer === null) {
-      toast({
-        title: "Выберите ответ",
-        description: "Пожалуйста, выберите один из вариантов",
-        variant: "destructive",
-      });
-      return;
-    }
+  const handleAnswerSelect = (value: string) => {
+    if (answerLocked) return;
+    
+    const answerIndex = parseInt(value, 10);
+    setSelectedAnswer(answerIndex);
+    setAnswerLocked(true);
 
     const currentTest = tests[selectedTest!];
-    const isCorrect = selectedAnswer === currentTest[currentQuestion].correct;
+    const isCorrect = answerIndex === currentTest[currentQuestion].correct;
 
     if (isCorrect) {
       setScore(score + 1);
@@ -146,6 +145,7 @@ const Tests = () => {
       if (currentQuestion < currentTest.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
         setSelectedAnswer(null);
+        setAnswerLocked(false);
       } else {
         setShowResult(true);
       }
@@ -159,6 +159,7 @@ const Tests = () => {
     setScore(0);
     setShowResult(false);
     setAnsweredQuestions([]);
+    setAnswerLocked(false);
   };
 
   if (!selectedTest) {
@@ -268,27 +269,33 @@ const Tests = () => {
       <CardContent className="space-y-6">
         <h3 className="text-2xl font-semibold">{currentTest[currentQuestion].question}</h3>
         
-        <RadioGroup value={selectedAnswer !== null ? selectedAnswer.toString() : undefined} onValueChange={(value) => setSelectedAnswer(parseInt(value, 10))}>
+        <RadioGroup value={selectedAnswer !== null ? selectedAnswer.toString() : undefined} onValueChange={handleAnswerSelect}>
           <div className="space-y-3">
-            {currentTest[currentQuestion].options.map((option, index) => (
-              <div key={index} className="flex items-center space-x-2 border rounded-lg p-4 hover:bg-accent/50 cursor-pointer">
-                <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-lg">
-                  {option}
-                </Label>
-              </div>
-            ))}
+            {currentTest[currentQuestion].options.map((option, index) => {
+              const isSelected = selectedAnswer === index;
+              const isCorrect = index === currentTest[currentQuestion].correct;
+              const showFeedback = answerLocked && isSelected;
+              
+              return (
+                <div 
+                  key={index} 
+                  className={`flex items-center space-x-2 border rounded-lg p-4 transition-colors ${
+                    answerLocked ? 'cursor-not-allowed opacity-70' : 'hover:bg-accent/50 cursor-pointer'
+                  } ${
+                    showFeedback && isCorrect ? 'bg-green-100 border-green-500' : ''
+                  } ${
+                    showFeedback && !isCorrect ? 'bg-red-100 border-red-500' : ''
+                  }`}
+                >
+                  <RadioGroupItem value={index.toString()} id={`option-${index}`} disabled={answerLocked} />
+                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-lg">
+                    {option}
+                  </Label>
+                </div>
+              );
+            })}
           </div>
         </RadioGroup>
-
-        <Button 
-          onClick={handleAnswer} 
-          className="w-full" 
-          size="lg"
-          disabled={selectedAnswer === null}
-        >
-          Проверить ответ
-        </Button>
       </CardContent>
     </Card>
   );
